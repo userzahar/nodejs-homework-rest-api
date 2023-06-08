@@ -1,9 +1,9 @@
 const bcryptjs = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
 
 const { ctrlWrapper, httpError } = require("../../helpers");
-
+const { SECRET_KEY } = process.env;
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -14,7 +14,10 @@ const login = async (req, res) => {
   if (!passwordCompare) {
     throw httpError(401, "Email or password invalid");
   }
-  const token = "osdfuhfs.dsfsdf.dsfsdf";
+  const payload = {
+    id: user._id,
+  };
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   res.json({
     token,
   });
