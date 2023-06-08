@@ -30,8 +30,8 @@ const userSchema = new Schema(
 userSchema.post("save", heandleMongoosError);
 
 const registerSchema = Joi.object({
-  email: Joi.string(),
-  password: Joi.string(),
+  email: Joi.string().required(),
+  password: Joi.string().required(),
 });
 
 const loginSchema = Joi.object({
