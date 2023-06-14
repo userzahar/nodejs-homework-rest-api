@@ -9,12 +9,6 @@ const avatarsDir = path.join(__dirname, "../", "../", "public", "avatars");
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
   const { path: tempUpload, originalname } = req.file;
-  const resizeImage = await jimp.read(tempUpload, (err, lenna) => {
-    if (err) throw err;
-    return lenna.resize(256, 256);
-  });
-  console.log("🚀", resizeImage);
-
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarsDir, filename);
   await fs.rename(tempUpload, resultUpload);
