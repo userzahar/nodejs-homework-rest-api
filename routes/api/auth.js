@@ -1,8 +1,12 @@
 const express = require("express");
 const controllers = require("../../controllers/auth");
-const { validateBody, authenticate, upload } = require("../../middlewares");
+const {
+  validateBody,
+  authenticate,
+  upload,
+  resizeAvatar,
+} = require("../../middlewares");
 const { schemasUser } = require("../../models/");
-const resizeAvatar = require("../../middlewares/resizeAvatar");
 
 const router = express.Router();
 // signup
