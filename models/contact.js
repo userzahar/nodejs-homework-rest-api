@@ -18,9 +18,15 @@ const contactSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
+
 contactSchema.post("save", heandleMongoosError);
 
 const contactPush = Joi.object({
@@ -29,6 +35,7 @@ const contactPush = Joi.object({
   phone: Joi.string().required(),
   favorite: Joi.boolean(),
 });
+
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });

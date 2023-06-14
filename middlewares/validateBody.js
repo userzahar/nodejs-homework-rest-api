@@ -12,5 +12,4 @@ const validateBody = (schema) => {
   return func;
 };
 
-// za
 module.exports = validateBody;
