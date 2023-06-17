@@ -1,4 +1,4 @@
-const { httpError } = require("../../helpers");
+const { httpError, ctrlWrapper } = require("../../helpers");
 const { User } = require("../../models");
 
 const verifyEmail = async (req, res) => {
@@ -14,4 +14,4 @@ const verifyEmail = async (req, res) => {
   res.json({ message: "Verification successful" });
 };
 
-module.exports = verifyEmail;
+module.exports = ctrlWrapper(verifyEmail);
