@@ -6,7 +6,7 @@ const {
   upload,
   resizeAvatar,
 } = require("../../middlewares");
-const { schemasUser } = require("../../models/");
+const { schemasUser, schemas } = require("../../models/");
 
 const router = express.Router();
 // signup
@@ -15,6 +15,11 @@ router.post(
   validateBody(schemasUser.registerSchema),
   controllers.register
 );
+
+router.get("/verify/:verificationToken", controllers.verifyEmail);
+
+router.post("/verify", validateBody(schemasUser.emailSchema), controllers.resendVerifyEmail);
+
 router.post("/login", validateBody(schemasUser.loginSchema), controllers.login);
 
 router.get("/current", authenticate, controllers.getCurrent);
